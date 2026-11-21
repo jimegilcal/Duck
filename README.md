@@ -164,7 +164,7 @@ No hay app precompilada: Duck no tiene firma de desarrollador ni notarización d
 Compilarlo en tu Mac evita el aviso de Gatekeeper.
 
 ```bash
-git clone https://github.com/user/duck.git   # ← sustituye por tu URL
+git clone https://github.com/jimegilcal/Duck.git
 cd duck
 npm ci
 npm run bundle          # la primera vez tarda varios minutos
