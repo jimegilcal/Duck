@@ -6,7 +6,7 @@
 <p align="center"><strong>Un patito 3D para tu escritorio de macOS</strong></p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/licencia-MIT-green.svg" alt="MIT"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/licencia-GPL--3.0-blue.svg" alt="GPL-3.0"></a>
   <img src="https://img.shields.io/badge/plataforma-macOS%20(Apple%20Silicon)-black?logo=apple" alt="macOS">
   <img src="https://img.shields.io/badge/Tauri%202-orange?logo=tauri&logoColor=white" alt="Tauri 2">
   <img src="https://img.shields.io/badge/Rust-black?logo=rust" alt="Rust">
@@ -289,4 +289,4 @@ El proyecto [`ios/`](ios/README.md) es un esbozo de una versión para iPhone, si
 
 ## Licencia
 
-[MIT](LICENSE)
+[GPL-3.0](LICENSE)
