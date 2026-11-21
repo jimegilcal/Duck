@@ -81,7 +81,20 @@ pub fn submit(c:&mut Connection,id:&str,text:&str,action:Action)->Result<Vec<Mes
      tx.execute("INSERT INTO chat_context VALUES (?1,?2)",params![id,serde_json::to_string(&event).map_err(storage::err)?]).map_err(storage::err)?;
      ("Estoy enviando el evento a Calendario. Si se interrumpe el guardado, revísalo antes de repetirlo.".into(),"agenda")
  },
- Action::Task{text}=>{propose(&tx,id,"task",&text)?;("La tarea está en Agenda. Desde allí puedes abrir Google Tasks y terminar de crearla. Todavía no se ha enviado.".into(),"agenda")},
+ Action::Task{text}=>{
+  let normalized = text.replace(", y ", ", ").replace(", Y ", ", ").replace(" y ", ", ").replace(" Y ", ", ");
+  let items:Vec<String> = normalized.split(',').map(|s|s.trim().to_string()).filter(|s|!s.is_empty()).collect();
+  if items.len()>1 {
+   for (i,item) in items.iter().enumerate() {
+    let sub_id = format!("{id}:{i}");
+    propose(&tx,&sub_id,"task",item)?;
+   }
+   (format!("He añadido {} tareas a Agenda.",items.len()),"agenda")
+  } else {
+   propose(&tx,id,"task",&text)?;
+   ("La tarea está en Agenda.".into(),"agenda")
+  }
+ },
  Action::Agents=>("Abre Agentes para ver cómo van tus sesiones de Claude Code y Codex.".into(),"agents"),
  Action::Report=>{let s=storage::snapshot(&tx)?;let completed=s.reminders.iter().filter(|r|r.completed).count();let pending=proposals(&tx)?.iter().filter(|p|p.status=="pending_connection").count();(format!("En este Mac tienes {} notas, {} recordatorios pendientes y {} completados. Hay {} borradores para Google. Puedes ver el detalle en Reporting.",s.notes.len(),s.reminders.len()-completed,completed,pending),"reporting")},
  Action::Undo{target}=>{
