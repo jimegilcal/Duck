@@ -1,0 +1,27 @@
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+.DS_Store
+*.local
+.env*
+!.env.example
+*.tsbuildinfo
+
+/Duck.app/
+
+xcuserdata/
+DerivedData/
+
+# Vídeo y material de promoción
+*.mp4
+*.mov
+*.m4v
+*.webm
+scripts/duck-promo/
+
+# Configuración personal y copias locales
+*-local.json
+settings.local.json
+.claude/
+*.bak

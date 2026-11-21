@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- Launch as a menu bar app so the companion can join other apps' full-screen spaces. -->
+  <key>LSUIElement</key>
+  <true/>
+  <key>NSCalendarsFullAccessUsageDescription</key>
+  <string>Duck necesita ver los calendarios disponibles y guardar los eventos que confirmes. Duck no consulta tus eventos existentes.</string>
+  <key>NSCalendarsUsageDescription</key>
+  <string>Duck necesita ver los calendarios disponibles y guardar los eventos que confirmes.</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Duck usa el micrófono cuando pulsas Dictar para escribir lo que dices en el chat.</string>
+  <key>NSSpeechRecognitionUsageDescription</key>
+  <string>Duck usa el reconocimiento de voz de macOS para transcribir tu dictado en este Mac.</string>
+</dict>
+</plist>

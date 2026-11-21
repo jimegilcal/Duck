@@ -1,0 +1,25 @@
+{
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "/usr/bin/python3 \"__HOOK_PATH__\" claude-code", "timeout": 3 } ] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "/usr/bin/python3 \"__HOOK_PATH__\" claude-code", "timeout": 3 } ] }
+    ],
+    "PreToolUse": [
+      { "matcher": "Task|Agent", "hooks": [ { "type": "command", "command": "/usr/bin/python3 \"__HOOK_PATH__\" claude-code", "timeout": 3 } ] }
+    ],
+    "PostToolUse": [
+      { "matcher": "Task|Agent|TodoWrite|Edit|MultiEdit|Write|NotebookEdit|Bash", "hooks": [ { "type": "command", "command": "/usr/bin/python3 \"__HOOK_PATH__\" claude-code", "timeout": 3 } ] }
+    ],
+    "Notification": [
+      { "hooks": [ { "type": "command", "command": "/usr/bin/python3 \"__HOOK_PATH__\" claude-code", "timeout": 3 } ] }
+    ],
+    "Stop": [
+      { "hooks": [ { "type": "command", "command": "/usr/bin/python3 \"__HOOK_PATH__\" claude-code", "timeout": 3 } ] }
+    ],
+    "SessionEnd": [
+      { "hooks": [ { "type": "command", "command": "/usr/bin/python3 \"__HOOK_PATH__\" claude-code", "timeout": 1 } ] }
+    ]
+  }
+}

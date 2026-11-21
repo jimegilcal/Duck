@@ -1,0 +1,24 @@
+// !$*UTF8*$!
+{
+ archiveVersion = 1;
+ classes = {};
+ objectVersion = 56;
+ objects = {
+  D0AC00000000000000000001 = {isa = PBXProject; attributes = {LastSwiftUpdateCheck = 1600; LastUpgradeCheck = 1600;}; buildConfigurationList = D0AC00000000000000000002; compatibilityVersion = "Xcode 14.0"; developmentRegion = es; knownRegions = (es, Base,); mainGroup = D0AC00000000000000000003; productRefGroup = D0AC00000000000000000004; projectDirPath = ""; projectRoot = ""; targets = (D0AC00000000000000000005,);};
+  D0AC00000000000000000002 = {isa = XCConfigurationList; buildConfigurations = (D0AC0000000000000000000A, D0AC0000000000000000000B,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
+  D0AC00000000000000000003 = {isa = PBXGroup; children = (D0AC00000000000000000006, D0AC00000000000000000004,); sourceTree = "<group>";};
+  D0AC00000000000000000004 = {isa = PBXGroup; children = (D0AC00000000000000000007,); name = Products; sourceTree = "<group>";};
+  D0AC00000000000000000005 = {isa = PBXNativeTarget; buildConfigurationList = D0AC0000000000000000000C; buildPhases = (D0AC00000000000000000008,); buildRules = (); dependencies = (); name = DuckMobile; productName = DuckMobile; productReference = D0AC00000000000000000007; productType = "com.apple.product-type.application";};
+  D0AC00000000000000000006 = {isa = PBXGroup; children = (D0AC00000000000000000009,); path = DuckMobile; sourceTree = "<group>";};
+  D0AC00000000000000000007 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DuckMobile.app; sourceTree = BUILT_PRODUCTS_DIR;};
+  D0AC00000000000000000008 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (D0AC0000000000000000000D,); runOnlyForDeploymentPostprocessing = 0;};
+  D0AC00000000000000000009 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuckMobileApp.swift; sourceTree = "<group>";};
+  D0AC0000000000000000000A = {isa = XCBuildConfiguration; buildSettings = {SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SWIFT_VERSION = 5.0; SWIFT_OPTIMIZATION_LEVEL = "-Onone";}; name = Debug;};
+  D0AC0000000000000000000B = {isa = XCBuildConfiguration; buildSettings = {SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SWIFT_VERSION = 5.0; SWIFT_OPTIMIZATION_LEVEL = "-O";}; name = Release;};
+  D0AC0000000000000000000C = {isa = XCConfigurationList; buildConfigurations = (D0AC0000000000000000000E, D0AC0000000000000000000F,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
+  D0AC0000000000000000000D = {isa = PBXBuildFile; fileRef = D0AC00000000000000000009;};
+  D0AC0000000000000000000E = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = Duck; INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Duck muestra los calendarios disponibles y guarda los eventos que confirmas."; INFOPLIST_KEY_UILaunchScreen_Generation = YES; MARKETING_VERSION = 0.1.0; PRODUCT_BUNDLE_IDENTIFIER = local.duck.companion.mobile; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; TARGETED_DEVICE_FAMILY = 1;}; name = Debug;};
+  D0AC0000000000000000000F = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = Duck; INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Duck muestra los calendarios disponibles y guarda los eventos que confirmas."; INFOPLIST_KEY_UILaunchScreen_Generation = YES; MARKETING_VERSION = 0.1.0; PRODUCT_BUNDLE_IDENTIFIER = local.duck.companion.mobile; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; TARGETED_DEVICE_FAMILY = 1;}; name = Release;};
+ };
+ rootObject = D0AC00000000000000000001;
+}

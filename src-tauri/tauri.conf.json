@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Duck",
+  "version": "0.1.0",
+  "identifier": "local.duck.companion",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "panel",
+        "title": "Duck",
+        "width": 920,
+        "height": 720,
+        "minWidth": 680,
+        "minHeight": 560,
+        "visible": false
+      },
+      {
+        "label": "duck",
+        "title": "Duck \u00b7 Compa\u00f1ero",
+        "url": "index.html?window=duck",
+        "width": 144,
+        "height": 144,
+        "x": 1000,
+        "y": 500,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false,
+        "alwaysOnTop": true,
+        "visibleOnAllWorkspaces": true,
+        "resizable": false,
+        "skipTaskbar": true,
+        "focus": false,
+        "focusable": false,
+        "acceptFirstMouse": true,
+        "visible": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src ipc: http://ipc.localhost; img-src 'self' asset: http://asset.localhost data:; style-src 'self' 'unsafe-inline'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "app"
+    ],
+    "icon": [
+      "icons/icon.png"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "13.0"
+    }
+  }
+}
