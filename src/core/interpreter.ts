@@ -143,6 +143,7 @@ function eventTitle(text:string) {
     .replace(/^(?:he\s+quedado|qued[oéeó]|quedamos)\s+/iu,'')
     .replace(/^(?:me|nos)\s+(?:veo|vemos|re[uú]no|reunimos)\s+/iu,'')
     .replace(/^(?:voy|vamos)\s+/iu,'')
+    .replace(/^(?:pon(?:me|er)?|poner|m[eé]te(?:me|r)?|a[ñn]ad(?:e(?:me)?|ir)|agrega(?:me|r)?|crea(?:r)?|programa(?:me|r)?|ap[uú]nta(?:me)?|anota(?:me|r)?)\s+/iu,'')
     .replace(/^a(?:l\b|\s+la\b)\s*/iu,'')
     .replace(/^(?:el|la|los|las)\s+/iu,'')
     .replace(/\s*\ba\s+(?:las?|als|lsa|ls)\s*[.!?]*$/iu,'')
@@ -283,6 +284,11 @@ function inferAction(text:string, original:string, now:Date):Action {
   }
   if (/^(?:gracias|muchas gracias|perfecto|vale|ok|de acuerdo)[.!]*$/iu.test(text)) {
     return {type:'clarify',message:'De nada.'};
+  }
+  const looksLikeNote = /\b(?:idea|apunte|nota|pensamiento|reflexi[oó]n|concepto)\b/iu.test(subject);
+  const actionVerb = /^(?:pon(?:me|er)?|m[eé]te(?:me|r)?|a[ñn]ad(?:e(?:me)?|ir)|agrega(?:me|r)?|programa(?:me|r)?|ap[uú]nta(?:me)?|anota(?:me|r)?)/iu.test(text);
+  if (hasSchedule && subject && !schedule.invalidTime && !looksLikeNote && (actionVerb || /\bde\s+\d{1,2}(?::\d{2})?\s+a\s+\d{1,2}(?::\d{2})?\b/iu.test(text))) {
+    return complete('event',text,now);
   }
   return {type:'note.create',body:original.trim()};
 }
