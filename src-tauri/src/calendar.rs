@@ -21,6 +21,7 @@ extern "C" {
     fn duck_list_calendars() -> *mut c_char;
     fn duck_calendar_detail(identifier: *const c_char) -> *mut c_char;
     fn duck_commit_event(identifier: *const c_char, title: *const c_char, start: f64, end: f64) -> *mut c_char;
+    fn duck_fetch_events(start: f64, end: f64) -> *mut c_char;
     fn duck_free_calendar_reply(result: *mut c_char);
 }
 
@@ -78,6 +79,29 @@ pub async fn select_calendar(app: AppHandle, id: String) -> Result<Calendar, Str
     settings.calendar_id = Some(choice.id.clone());
     desktop::save_settings(app, settings)?;
     Ok(choice)
+}
+
+#[derive(Deserialize, Serialize, Clone, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct CalendarEvent {
+    pub title: String,
+    pub start: f64,
+    pub end: f64,
+    pub all_day: bool,
+    pub calendar: String,
+}
+
+pub fn fetch_today_events() -> Result<Vec<CalendarEvent>, String> {
+    let now = chrono::Local::now();
+    let start_of_day = now.date_naive().and_hms_opt(0, 0, 0).unwrap();
+    let end_of_day = now.date_naive().and_hms_opt(23, 59, 59).unwrap();
+    let tz = now.offset();
+    let start_ts = start_of_day.and_local_timezone(*tz).unwrap().timestamp() as f64;
+    let end_ts = end_of_day.and_local_timezone(*tz).unwrap().timestamp() as f64;
+    #[cfg(target_os = "macos")]
+    { read_native(unsafe { duck_fetch_events(start_ts, end_ts) }) }
+    #[cfg(not(target_os = "macos"))]
+    { Ok(vec![]) }
 }
 
 pub(crate) fn validate_event(title: &str, start: &str, end: &str) -> Result<(CString, DateTime<Utc>, DateTime<Utc>), String> {

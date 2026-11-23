@@ -89,4 +89,26 @@ char *duck_commit_event(const char *identifier, const char *title, double start,
     }
 }
 
+char *duck_fetch_events(double start, double end) {
+    @autoreleasepool {
+        if (!hasFullAccess()) return fail(@"Permite a Duck acceder a Calendario en Ajustes del Sistema → Privacidad y seguridad → Calendarios.");
+        EKEventStore *store = [[EKEventStore alloc] init];
+        NSDate *startDate = [NSDate dateWithTimeIntervalSince1970:start];
+        NSDate *endDate = [NSDate dateWithTimeIntervalSince1970:end];
+        NSPredicate *predicate = [store predicateForEventsWithStartDate:startDate endDate:endDate calendars:nil];
+        NSArray<EKEvent *> *events = [store eventsMatchingPredicate:predicate];
+        NSMutableArray *results = [NSMutableArray array];
+        for (EKEvent *event in events) {
+            [results addObject:@{
+                @"title": event.title ?: @"(sin título)",
+                @"start": @([event.startDate timeIntervalSince1970]),
+                @"end": @([event.endDate timeIntervalSince1970]),
+                @"allDay": @(event.allDay),
+                @"calendar": event.calendar.title ?: @"Calendario"
+            }];
+        }
+        return reply(@{ @"value": results });
+    }
+}
+
 void duck_free_calendar_reply(char *result) { free(result); }

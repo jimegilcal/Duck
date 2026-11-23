@@ -122,21 +122,24 @@ pub fn submit(c:&mut Connection,id:&str,text:&str,action:Action)->Result<Vec<Mes
   let s = storage::snapshot(&tx)?;
   let notes_today:Vec<_> = s.notes.iter().filter(|n|n.created_at.starts_with(&today)).collect();
   let reminders_today:Vec<_> = s.reminders.iter().filter(|r|!r.completed && r.due_at.starts_with(&today)).collect();
-  let props = proposals(&tx)?;
-  let events_today:Vec<_> = props.iter().filter(|p|{
-   p.event_details.as_ref().map_or(false,|e|e.start.starts_with(&today))
-  }).collect();
-  if notes_today.is_empty() && reminders_today.is_empty() && events_today.is_empty() {
+  let mut cal_events = crate::calendar::fetch_today_events().unwrap_or_default();
+  cal_events.sort_by(|a,b|a.start.partial_cmp(&b.start).unwrap_or(std::cmp::Ordering::Equal));
+  let has_content = !notes_today.is_empty() || !reminders_today.is_empty() || !cal_events.is_empty();
+  if !has_content {
    ("Hoy no tienes nada apuntado.".into(),"home")
   } else {
    let mut parts = Vec::new();
-   if !events_today.is_empty() {
-    let items:Vec<String> = events_today.iter().map(|e|{
-     let details = e.event_details.as_ref().unwrap();
-     let time = chrono::DateTime::parse_from_rfc3339(&details.start).map(|t|t.with_timezone(&chrono::Local).format("%H:%M").to_string()).unwrap_or_default();
-     format!("· {} a las {}",details.title,time)
+   if !cal_events.is_empty() {
+    let items:Vec<String> = cal_events.iter().map(|e|{
+     if e.all_day {
+      format!("· {} (todo el día, {})",e.title,e.calendar)
+     } else {
+      let start = chrono::DateTime::from_timestamp(e.start as i64,0).map(|t|t.with_timezone(&chrono::Local).format("%H:%M").to_string()).unwrap_or_default();
+      let end = chrono::DateTime::from_timestamp(e.end as i64,0).map(|t|t.with_timezone(&chrono::Local).format("%H:%M").to_string()).unwrap_or_default();
+      format!("· {} de {} a {} ({})",e.title,start,end,e.calendar)
+     }
     }).collect();
-    parts.push(format!("Eventos:\n{}",items.join("\n")));
+    parts.push(format!("Calendario:\n{}",items.join("\n")));
    }
    if !reminders_today.is_empty() {
     let items:Vec<String> = reminders_today.iter().map(|r|{
