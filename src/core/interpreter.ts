@@ -138,7 +138,7 @@ function durationFrom(text:string, answering:boolean) {
 
 function eventTitle(text:string) {
   const title = content(text)
-    .replace(/^(?:con\s+(?:el\s+)?t[ií]tulo|que\s+se\s+llame|ll[aá]malo|tit[uú]lalo)\s*:?\s*/iu,'')
+    .replace(/^(?:con\s+(?:el\s+)?t[ií]tulo|(?:que\s+)?se\s+llama?|ll[aá]ma(?:lo|la|le|se)?|tit[uú]la(?:lo|la|le)?)\s*:?\s*/iu,'')
     .replace(/^(?:tengo|hay)\s+(?:una?\s+)?/iu,'')
     .replace(/^(?:he\s+quedado|qued[oéeó]|quedamos)\s+/iu,'')
     .replace(/^(?:me|nos)\s+(?:veo|vemos|re[uú]no|reunimos)\s+/iu,'')
